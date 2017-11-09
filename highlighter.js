@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
   const wordsInput = document.getElementById('words-input');
   const regex = /,+\b|,+\s/g;
@@ -9,39 +8,16 @@ document.addEventListener('DOMContentLoaded', function() {
   function assignNextColor() {
     return;
   }
+
   
-  wordsInput.addEventListener('keydown', function(e) {
+  wordsInput.addEventListener('keyup', function(e) {
     searchWords = wordsInput.value.split(regex);
-    if(searchWords){
-      chrome.tabs.query({ active:true, currentWindow:true }, function(tabs) {
-        chrome.tabs.executeScript(tabs[0].id, { file: background.js } );
-        chrome.tabs.sendMessage(tabs[0].id, { method: 'search', searchText: searchWords });
+
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {data: searchWords}, function(response) {
+          console.log(response.farewell);
       });
+    });
   });
 
 });
-
-
-
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   var checkPageButton = document.getElementById('checkPage');
-//   checkPageButton.addEventListener('click', function() {
-
-//     chrome.tabs.getSelected(null, function(tab) {
-//       d = document;
-
-//       var f = d.createElement('form');
-//       f.action = 'http://gtmetrix.com/analyze.html?bm';
-//       f.method = 'post';
-//       var i = d.createElement('input');
-//       i.type = 'hidden';
-//       i.name = 'url';
-//       i.value = tab.url;
-//       f.appendChild(i);
-//       d.body.appendChild(f);
-//       f.submit();
-//     });
-//   }, false);
-// }, false);

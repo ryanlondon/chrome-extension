@@ -1,23 +1,47 @@
 {
   "manifest_version": 2,
 
-  "name": "Highlighter",
+  "name": "Multi Highlighter",
   "description": "Highlights multiple words",
   "version": "1.0",
 
-  "browser_action": {
-   "default_icon": "icon.png",
-   "default_popup": "popup.html"
-  },
-  "permissions": [
-   "activeTab"
-   ],
-   "content_scripts": [
+  "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "js": ["background.js"]
+      "js": ["content.js"]
     }
+  ],
+
+  "browser_action": {
+   "default_icon": "icon.png",
+   "default_popup": "popup.html",
+   "default_title": "Multi Highlighter"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*", 
+    "https://*/*"
   ]
+
+  // "background": {
+  //   "scripts": ["background.js"]
+  // }
 }
+
+
+// {
+// 	"manifest_version": 2,
+// 	"name": "Cloud To Butt",
+// 	"version": "1.0",
+// 	"description": "Replaces the text 'the cloud' with 'my butt'.",
+// 	"content_scripts": 
+// 	[
+// 		{
+// 			"matches": ["*://*/*"],
+// 			"js": ["content.js"],
+// 			"run_at": "document_end"
+// 		}
+// 	]
+// }
